@@ -2,7 +2,7 @@ const initialState = {
     categoriesLists: [
       { normalizedName: 'ELECTRONICS', displayName: 'Electronics' , description: 'Here is some description of the electronics we sell'},
       { normalizedName: 'FOOD', displayName: 'Food' , description: 'Here is some description of the Food we sell'},
-      { normalizedName: '', dispClotheslayName: 'Clothes' , description: 'Here is some description of the electronics we sell'},
+      // { normalizedName: '', dispClotheslayName: 'Clothes' , description: 'Here is some description of the electronics we sell'},
     ],
     activeCategory: null,
   };

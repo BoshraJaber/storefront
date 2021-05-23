@@ -9,10 +9,10 @@ const displayCategory = (props) => {
      <>
       <ul>
         {
-          props.categoriesLists.map(category =>{
+          props.categories.categoriesLists.map(category =>{
             return(
               <li onClick= {()=> props.activeCategory(category.normalizedName)} key={category.normalizedName}>
-                {candidate.displayName}
+                {category.displayName}
               </li>
             )
           })
@@ -22,8 +22,8 @@ const displayCategory = (props) => {
 };
 const mapStateToProps = (state) => {
   console.log(state);
-  return { candidates: state.counter.candidates };
+  return { categories: state.Categories };
 };
-const mapDispatchToProps = { increment, reset };
+const mapDispatchToProps = { activeCategory };
 // the order of (mapStateToProps,mapDispatchToProps have to be the same
 export default connect(mapStateToProps, mapDispatchToProps)(displayCategory);

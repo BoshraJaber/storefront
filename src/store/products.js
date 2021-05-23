@@ -5,7 +5,6 @@ const initialState = {
       { categoryAssociation: 'ELECTRONICS', name: 'Computer' , description: 'Core i5 Intel', price: "700JD", inventoryCount : 6 },
 
       { categoryAssociation: 'FOOD', name: 'Ice cream' , description: 'All flavor', price: "10JD", inventoryCount : 18 },
-
     ],
 };
 
