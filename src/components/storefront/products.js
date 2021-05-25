@@ -101,6 +101,7 @@ const Products = (props) => {
                       </CardContent>
                       <CardActions>
                         <Button
+                        onClick={() => addProduct(product)}
                           size="small"
                           color="primary"
                           // onClick={() => props.increment()}
