@@ -4,14 +4,21 @@ import { connect } from "react-redux";
 import { If, Else, Then } from "react-if";
 
 function Cart(props) {
+    let cart = props.cart.cart;
+
   return (
     <>
-      <If condition={props.cart.cart > 0}>
+      <If condition={props.cart.selectProduct}>
         <Then>
           Cart:
           <ul>
-            {props.cart.cart.map((product) => {
-              <li>{product.name}</li>;
+            {cart.map((product,i) => {
+                {console.log('inside the map',product[i])}
+                
+             return( <li  key={product[i].name}> 
+            {product[i].name}
+            {/* <button onClick={props.deleteProduct(product[i].name)}></button> */}
+             </li>)
             })}
           </ul>
         </Then>
@@ -20,7 +27,7 @@ function Cart(props) {
         </Else>
       </If>
 
-      {console.log("cart component", props.cart.cart)}
+      {/* {console.log("cart component", props.cart.cart)} */}
     </>
   );
 }

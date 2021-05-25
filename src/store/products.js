@@ -50,6 +50,7 @@ const initialState = {
     },
   ],
   cart: [],
+  selectProduct: false,
 };
 
 const products = (state = initialState, action) => {
@@ -63,7 +64,11 @@ const products = (state = initialState, action) => {
         );
       });
       // console.log('ProductsLists',ProductsLists)
-      return { ProductsLists };
+      return { 
+        ProductsLists,
+        cart: state.cart,
+        selectProduct: state.selectProduct
+       };
 
     case "REDUCE":
       const products = state.ProductsLists.map((product) => {
@@ -81,44 +86,23 @@ const products = (state = initialState, action) => {
 					return product;
 				}
 			});
-// console.log(
-//   products
-// );
-			return {
-        ProductsLists:	products,
-        cart: state.cart,
-			};
-
-
-    case "ADD":
       let selectedProduct = state.ProductsLists.filter((product) => {
         return product.name === payload; 
       });
-      // console.log('Here',selectedProduct);
 			return {
-        ProductsLists:	state.ProductsLists,
-        cart: selectedProduct,
+        ProductsLists:	products,
+        cart:  [...state.cart, selectedProduct],
+        selectProduct: true,
 			};
-      //
-    //   const productName = state.cart.map((product) => product.name);
-    //   if (!productName.includes(payload.name)) {
-    //     payload.inCart = 1;
-    //     return { cart: [...state.cart, payload] };
-    //   }
-    //   const cartUpdated = state.cart.map((product) => {
-    //     if (product.name === payload.name) {
-    //       product.inCart++;
-    //     }
-    //     return product;
-    //   });
-    //   return { ...state.cart, cartUpdated };
 
-    // case "DELETE":
-    //   // filter all cart based on the deleted product coming from payload then return it
-    //   const newProducts = state.cart.filter(
-    //     (product) => product.name !== payload.product.name
-    //   );
-    //   return { cart: newProducts };
+    case "DELETE":
+      const deleteProduct = state.cart.filter(
+        (product) => product.name !== payload
+      );
+      return {
+        ProductsLists: state.ProductsLists,
+         cart: deleteProduct,
+         selectProduct: true, };
 
     default:
       return state;
