@@ -2,6 +2,8 @@ import { If, Else, Then } from "react-if";
 import React from "react";
 import { connect } from "react-redux";
 import { activeCategory } from "../../store/categories";
+import {addProduct} from '../../store/products'
+import {reduceCounter} from '../../store/products'
 import { Button,Typography, Grid, Card,  CardMedia, CardContent,  CardActions,  Container,  makeStyles,  ClickAwayListener,} from "@material-ui/core/";
 // import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -84,6 +86,7 @@ const Products = (props) => {
         <Grid container spacing={4}>
           <If condition={props.categories.activeCategory !== null}>
             <Then>
+              {/* {console.log(props.products)} */}
               {props.products.ProductsLists.map((product) => {
                 return (
                   <Grid item key={product.name} xs={12} sm={6} md={4}>
@@ -97,14 +100,17 @@ const Products = (props) => {
                         <Typography gutterBottom variant="h5" component="h2">
                           {product.name}
                         </Typography>
-                        <Typography>Price: ${product.price}</Typography>
+                        <Typography>Price: {product.price}</Typography>
+                        <Typography>Inventory Count: {product.inventoryCount}</Typography>
                       </CardContent>
                       <CardActions>
                         <Button
-                        onClick={() => addProduct(product)}
                           size="small"
                           color="primary"
-                          // onClick={() => props.increment()}
+                          onClick={() =>{ 
+                            props.reduceCounter(product.name)
+                            props.addProduct(product.name);
+                          }}
                         >
                           ADD TO CART
                         </Button>
@@ -160,9 +166,8 @@ const Products = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
   return { products: state.Products, categories: state.Categories };
 };
-const mapDispatchToProps = { activeCategory };
+const mapDispatchToProps = { activeCategory,addProduct,reduceCounter };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

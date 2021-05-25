@@ -46,7 +46,7 @@ const displayCategory = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return { categories: state.Categories };
 };
 const mapDispatchToProps = { activeCategory };

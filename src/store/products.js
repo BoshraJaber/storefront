@@ -9,7 +9,7 @@ const initialState = {
       price: "700JD",
       inventoryCount: 6,
       img: "https://cdn.britannica.com/77/170477-050-1C747EE3/Laptop-computer.jpg",
-      inCart: 0
+      inCart: 0,
     },
     {
       categoryAssociation: "ELECTRONICS",
@@ -18,7 +18,7 @@ const initialState = {
       price: "500JD",
       inventoryCount: 8,
       img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone11-select-2019-family?wid=882&hei=1058&fmt=jpeg&qlt=80&.v=1567022175704",
-      inCart: 0
+      inCart: 0,
     },
 
     {
@@ -28,27 +28,28 @@ const initialState = {
       price: "10JD",
       inventoryCount: 18,
       img: "https://littlefaifo.com/wp-content/uploads/2021/03/ourstory_012-6.jpg",
-      inCart: 0
+      inCart: 0,
     },
     {
       categoryAssociation: "FOOD",
       name: "Cake",
       description: "sweet",
       price: "10JD",
-      inventoryCount: 18,
+      inventoryCount: 7,
       img: "https://tatyanaseverydayfood.com/wp-content/uploads/2018/07/Summer-Sangria-Cake-4.jpg",
-      inCart: 0
+      inCart: 0,
     },
     {
       categoryAssociation: "FOOD",
       name: "PanCake",
       description: "Dessert",
       price: "10JD",
-      inventoryCount: 18,
+      inventoryCount: 10,
       img: "https://i2.wp.com/www.eatthis.com/wp-content/uploads/2019/11/whole-grain-pancake-stack.jpg?fit=1200%2C879&ssl=1",
-      inCart: 0
+      inCart: 0,
     },
   ],
+  cart: [],
 };
 
 const products = (state = initialState, action) => {
@@ -57,19 +58,68 @@ const products = (state = initialState, action) => {
   switch (type) {
     case "ACTIVE":
       let ProductsLists = initialState.ProductsLists.filter((product) => {
-        return product.categoryAssociation === payload  && product.inventoryCount > 0;
+        return (
+          product.categoryAssociation === payload && product.inventoryCount > 0
+        );
       });
       // console.log('ProductsLists',ProductsLists)
       return { ProductsLists };
 
     case "REDUCE":
-      let ProductsLists = initialState.ProductsLists.map((product) => {
-        if (product.name === payload) {
-          product.inventoryCount--;
-          product.inCart++;
-        }
+      const products = state.ProductsLists.map((product) => {
+				if (payload === product.name) {
+					return {
+						categoryAssociation: product.categoryAssociation,
+						name: product.name,
+						description: product.description,
+						price: product.price,
+						inventoryCount: product.inventoryCount - 1,
+						img: product.img,
+            inCart: product.inCart + 1,
+					};
+				} else {
+					return product;
+				}
+			});
+// console.log(
+//   products
+// );
+			return {
+        ProductsLists:	products,
+        cart: state.cart,
+			};
+
+
+    case "ADD":
+      let selectedProduct = state.ProductsLists.filter((product) => {
+        return product.name === payload; 
       });
-      return { ProductsLists };
+      // console.log('Here',selectedProduct);
+			return {
+        ProductsLists:	state.ProductsLists,
+        cart: selectedProduct,
+			};
+      //
+    //   const productName = state.cart.map((product) => product.name);
+    //   if (!productName.includes(payload.name)) {
+    //     payload.inCart = 1;
+    //     return { cart: [...state.cart, payload] };
+    //   }
+    //   const cartUpdated = state.cart.map((product) => {
+    //     if (product.name === payload.name) {
+    //       product.inCart++;
+    //     }
+    //     return product;
+    //   });
+    //   return { ...state.cart, cartUpdated };
+
+    // case "DELETE":
+    //   // filter all cart based on the deleted product coming from payload then return it
+    //   const newProducts = state.cart.filter(
+    //     (product) => product.name !== payload.product.name
+    //   );
+    //   return { cart: newProducts };
+
     default:
       return state;
   }
@@ -81,6 +131,19 @@ export default products;
 export const reduceCounter = (productName) => {
   return {
     type: "REDUCE",
+    payload: productName,
+  };
+};
+export const addProduct = (productName) => {
+  return {
+    type: "ADD",
+    payload: productName,
+  };
+};
+
+export const deleteProduct = (productName) => {
+  return {
+    type: "DELETE",
     payload: productName,
   };
 };
