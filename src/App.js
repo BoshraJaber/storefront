@@ -1,8 +1,9 @@
 import './App.css';
-import Header from './components/ header/ header'
-import Footer from './components/ footer/ footer'
-import Categories from './components/storefront/categories'
-import Products from './components/storefront/products'
+import Header from './components/ header/ header';
+import Footer from './components/ footer/ footer';
+import Categories from './components/storefront/categories';
+import Products from './components/storefront/products';
+import Cart from './components/cart/simplecart'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
     <Header/>
     <Categories/>
     <Products/>
+    <Cart />
     <Footer/>
     </>
   );
