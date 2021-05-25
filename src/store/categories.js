@@ -15,8 +15,7 @@ const initialState = {
         const activeCategory = payload;
         const categoriesLists = state.categoriesLists;
         return { categoriesLists, activeCategory };
-    //   case 'RESET':
-    //     return initialState;
+
       default:
         return state;
     }
