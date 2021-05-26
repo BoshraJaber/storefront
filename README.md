@@ -24,7 +24,7 @@ An e-Commerce storefront using React with Redux, coupled with  live API server
 * As a user, I want to be able to remove an item from my shopping cart
 
 ## UML
-![Created with diagrams](./src/assets/redux.png)
+![Created with diagrams](./src/assets/combinedReducers.png)
 
 
 
