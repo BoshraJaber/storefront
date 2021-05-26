@@ -13,6 +13,7 @@ An e-Commerce storefront using React with Redux, coupled with  live API server
   - To use condition: `npm i react-if`
   - To use Redux: `npm i react-redux redux redux-devtools-extension`
   - Install Material UI: `npm install @material-ui/core`, `npm install @material-ui/icons`.
+  - To use Thunk middleware: `npm i redux-thunk`
 
 # User Stories:
 * As a user, I expect to see a list of available product categories in the store so that I can easily browse products

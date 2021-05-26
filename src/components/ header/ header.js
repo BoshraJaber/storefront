@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Typography, Toolbar, Link, Grid } from "@material-ui/core/";
 import purple from '@material-ui/core/colors/purple';
-
+import { connect } from "react-redux";
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -21,7 +21,8 @@ const theme = createMuiTheme({
   },
 })
 
-const Header = () => {
+const Header = (props) => {
+  let cart = props.cart.cart;
   return (
     <header>
       {/* <h1>Boshra Store</h1>
@@ -41,7 +42,7 @@ const Header = () => {
                 Boshra Store
               
             </Typography>
-            Cart (0)
+            Cart ({cart.length})
           </Grid>
         </Toolbar>
       </AppBar>
@@ -49,4 +50,14 @@ const Header = () => {
   );
 };
 
-export default Header;
+
+const mapStateToProps = (state) => {
+  // console.log(state);
+  return { cart: state.Products };
+};
+// const mapDispatchToProps = { deleteProduct };
+
+export default connect(mapStateToProps)(Header);
+
+
+// export default Header;

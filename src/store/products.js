@@ -9,7 +9,7 @@ const initialState = {
       price: "700JD",
       inventoryCount: 6,
       img: "https://cdn.britannica.com/77/170477-050-1C747EE3/Laptop-computer.jpg",
-      inCart: 0,
+      inCart: 1,
     },
     {
       categoryAssociation: "ELECTRONICS",
@@ -18,7 +18,7 @@ const initialState = {
       price: "500JD",
       inventoryCount: 8,
       img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone11-select-2019-family?wid=882&hei=1058&fmt=jpeg&qlt=80&.v=1567022175704",
-      inCart: 0,
+      inCart: 1,
     },
 
     {
@@ -28,7 +28,7 @@ const initialState = {
       price: "10JD",
       inventoryCount: 18,
       img: "https://littlefaifo.com/wp-content/uploads/2021/03/ourstory_012-6.jpg",
-      inCart: 0,
+      inCart: 1,
     },
     {
       categoryAssociation: "FOOD",
@@ -37,7 +37,7 @@ const initialState = {
       price: "10JD",
       inventoryCount: 7,
       img: "https://tatyanaseverydayfood.com/wp-content/uploads/2018/07/Summer-Sangria-Cake-4.jpg",
-      inCart: 0,
+      inCart: 1,
     },
     {
       categoryAssociation: "FOOD",
@@ -46,7 +46,7 @@ const initialState = {
       price: "10JD",
       inventoryCount: 10,
       img: "https://i2.wp.com/www.eatthis.com/wp-content/uploads/2019/11/whole-grain-pancake-stack.jpg?fit=1200%2C879&ssl=1",
-      inCart: 0,
+      inCart: 1,
     },
   ],
   cart: [],
@@ -86,9 +86,11 @@ const products = (state = initialState, action) => {
 					return product;
 				}
 			});
-      let selectedProduct = state.ProductsLists.filter((product) => {
+      let selectedProduct = state.ProductsLists.find((product) => {
         return product.name === payload; 
       });
+ 
+     
 			return {
         ProductsLists:	products,
         cart:  [...state.cart, selectedProduct],

@@ -13,10 +13,10 @@ function Cart(props) {
           Cart:
           <ul>
             {cart.map((product,i) => {
-                {console.log('inside the map',product[i])}
+                // {console.log('inside the map',product)}
                 
-             return( <li  key={product[i].name}> 
-            {product[i].name}
+             return( <li  key={product.name}> 
+            {product.name} ({product.inCart})
             {/* <button onClick={props.deleteProduct(product[i].name)}></button> */}
              </li>)
             })}
