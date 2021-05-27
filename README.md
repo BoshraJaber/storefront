@@ -4,7 +4,7 @@ An e-Commerce storefront using React with Redux, coupled with  live API server
 
 # Deployment Test
 * Author: Boshra Jaber
-* Deployer [Link](https://60ad75e9d9b6a9008eaf715f--storefront401.netlify.app/)
+* Deployer [Link](https://60af8ccbc8ba4200a92204db--storefront401.netlify.app/)
 * Setup: 
   - To create a react app: `npx create-react-app app-name`
   - another way by adding npm flag: `npx create-react-app app-name --use-npm`

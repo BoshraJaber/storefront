@@ -2,28 +2,54 @@ import { deleteProduct } from "../../store/products";
 import React from "react";
 import { connect } from "react-redux";
 import { If, Else, Then } from "react-if";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    float: 'right',
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(1),
+      width: theme.spacing(16),
+      height: theme.spacing(16),
+    },
+  },
+}));
 
 function Cart(props) {
-    let cart = props.cart.cart;
+  const classes = useStyles();
+  let cart = props.cart.cart;
 
   return (
     <>
-      <If condition={props.cart.selectProduct}>
+      <If condition={cart.length>0}>
         <Then>
-          Cart:
-          <ul>
-            {cart.map((product,i) => {
+          <div className={classes.root}>
+            
+            <Paper>
+            Cart:
+              {cart.map((product, i) => {
                 // {console.log('inside the map',product)}
-                
-             return( <li  key={product.name}> 
-            {product.name} ({product.inCart})
-            {/* <button onClick={props.deleteProduct(product[i].name)}></button> */}
-             </li>)
-            })}
-          </ul>
+                if (cart.includes(product)) {
+                  return (
+                    <li style={{margin:'3px'}} key={product.name}>
+                      {product.name} ({product.inCart})
+                      {/* <button onClick={props.deleteProduct(product.name)}></button> */}
+                    </li>
+                  );
+                }
+              })}
+            </Paper>
+          </div>
         </Then>
         <Else>
+        <div className={classes.root}>
+        <Paper>
           <p>Your Cart Is Empty</p>
+          </Paper>
+          </div>
         </Else>
       </If>
 

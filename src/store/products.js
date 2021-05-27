@@ -1,5 +1,3 @@
-// import {  activeCategory } from './categories';
-
 const initialState = {
   ProductsLists: [
     {
@@ -50,7 +48,6 @@ const initialState = {
     },
   ],
   cart: [],
-  selectProduct: false,
 };
 
 const products = (state = initialState, action) => {
@@ -63,48 +60,51 @@ const products = (state = initialState, action) => {
           product.categoryAssociation === payload && product.inventoryCount > 0
         );
       });
-      // console.log('ProductsLists',ProductsLists)
-      return { 
+      return {
         ProductsLists,
         cart: state.cart,
-        selectProduct: state.selectProduct
-       };
+      };
 
     case "REDUCE":
       const products = state.ProductsLists.map((product) => {
-				if (payload === product.name) {
-					return {
-						categoryAssociation: product.categoryAssociation,
-						name: product.name,
-						description: product.description,
-						price: product.price,
-						inventoryCount: product.inventoryCount - 1,
-						img: product.img,
+        if (payload === product.name) {
+          return {
+            categoryAssociation: product.categoryAssociation,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            inventoryCount: product.inventoryCount - 1,
+            img: product.img,
             inCart: product.inCart + 1,
-					};
-				} else {
-					return product;
-				}
-			});
-      let selectedProduct = state.ProductsLists.find((product) => {
-        return product.name === payload; 
+          };
+        } else {
+          return product;
+        }
       });
- 
-     
-			return {
-        ProductsLists:	products,
-        cart:  [...state.cart, selectedProduct],
-        selectProduct: true,
-			};
+      let selectedProduct = state.ProductsLists.find((product) => {
+        return product.name === payload;
+      });
+      let upDatedCart = [...state.cart, selectedProduct];
+
+      const existProduct = state.cart.find((product) => product.name === payload);
+
+			const index = upDatedCart.indexOf(existProduct);
+
+			if (index !== -1) upDatedCart.splice(index, 1);
+
+      return {
+        ProductsLists: products,
+        cart: upDatedCart,
+      };
 
     case "DELETE":
       const deleteProduct = state.cart.filter(
-        (product) => product.name !== payload
-      );
+        (product) => product.name !== payload);
+
       return {
         ProductsLists: state.ProductsLists,
-         cart: deleteProduct,
-         selectProduct: true, };
+        cart: state.cart,
+      };
 
     default:
       return state;
@@ -143,3 +143,4 @@ export const deleteProduct = (productName) => {
 // Create an action that will trigger when the active category is changed
 // HINT: Multiple reducers can respond to the same actions
 // Create a reducer that will filter the products list based on the active category
+
