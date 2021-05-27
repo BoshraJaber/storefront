@@ -2,11 +2,22 @@ import { If, Else, Then } from "react-if";
 import React from "react";
 import { connect } from "react-redux";
 import { activeCategory } from "../../store/categories";
-import {addProduct} from '../../store/products'
-import {reduceCounter} from '../../store/products'
-import { Button,Typography, Grid, Card,  CardMedia, CardContent,  CardActions,  Container,  makeStyles,  ClickAwayListener,} from "@material-ui/core/";
+import { addProduct } from "../../store/products";
+import { reduceCounter } from "../../store/products";
+import {
+  Button,
+  Typography,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Container,
+  makeStyles,
+  ClickAwayListener,
+} from "@material-ui/core/";
 // import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import Modal from "@material-ui/core/Modal";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -21,13 +32,13 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
-
 const useStyles = makeStyles((theme) => ({
+
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -101,21 +112,23 @@ const Products = (props) => {
                           {product.name}
                         </Typography>
                         <Typography>Price: {product.price}</Typography>
-                        <Typography>Inventory Count: {product.inventoryCount}</Typography>
+                        <Typography>
+                          Inventory Count: {product.inventoryCount}
+                        </Typography>
                       </CardContent>
                       <CardActions>
                         <Button
                           size="small"
                           color="primary"
-                          onClick={() =>{ 
-                            props.reduceCounter(product.name)
+                          onClick={() => {
+                            props.reduceCounter(product.name);
                             props.addProduct(product.name);
                           }}
                         >
                           ADD TO CART
                         </Button>
                         <button type="button" onClick={handleOpen}>
-                        VIEW DETAILS
+                          VIEW DETAILS
                         </button>
                         <Modal
                           open={open}
@@ -124,15 +137,14 @@ const Products = (props) => {
                           aria-describedby="simple-modal-description"
                         >
                           {
-                             
-                                <div style={modalStyle} className={classes.paper}>
-                                  <h2 id="simple-modal-title">Details of {product.name}</h2>
-                                  <p id="simple-modal-description">
-                                  {product.description}
-                                  </p>
-                                  
-                                </div>
-                              
+                            <div style={modalStyle} className={classes.paper}>
+                              <h2 id="simple-modal-title">
+                                Details of {product.name}
+                              </h2>
+                              <p id="simple-modal-description">
+                                {product.description}
+                              </p>
+                            </div>
                           }
                         </Modal>
                         {/* <Button size="small" color="primary" >
@@ -157,7 +169,9 @@ const Products = (props) => {
               })}
             </Then>
             <Else>
-              <p>Choose a Category to start</p>
+              <Typography variant="h3" component="h4">
+                Please Choose a Category to start
+              </Typography>
             </Else>
           </If>
         </Grid>
@@ -168,6 +182,6 @@ const Products = (props) => {
 const mapStateToProps = (state) => {
   return { products: state.Products, categories: state.Categories };
 };
-const mapDispatchToProps = { activeCategory,addProduct,reduceCounter };
+const mapDispatchToProps = { activeCategory, addProduct, reduceCounter };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

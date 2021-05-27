@@ -4,7 +4,7 @@ An e-Commerce storefront using React with Redux, coupled with  live API server
 
 # Deployment Test
 * Author: Boshra Jaber
-* Deployer [Link](https://60ad75e9d9b6a9008eaf715f--storefront401.netlify.app/)
+* Deployer [Link](https://60af8ccbc8ba4200a92204db--storefront401.netlify.app/)
 * Setup: 
   - To create a react app: `npx create-react-app app-name`
   - another way by adding npm flag: `npx create-react-app app-name --use-npm`
@@ -13,6 +13,7 @@ An e-Commerce storefront using React with Redux, coupled with  live API server
   - To use condition: `npm i react-if`
   - To use Redux: `npm i react-redux redux redux-devtools-extension`
   - Install Material UI: `npm install @material-ui/core`, `npm install @material-ui/icons`.
+  - To use Thunk middleware: `npm i redux-thunk`
 
 # User Stories:
 * As a user, I expect to see a list of available product categories in the store so that I can easily browse products
